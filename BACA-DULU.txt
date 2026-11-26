@@ -1,0 +1,22 @@
+NomNom - Web Pemesanan
+
+STRUKTUR FILE:
+- index.html   : File utama HTML (struktur halaman web)
+- style.css    : File CSS (semua styling, tema tampilan, layout, dan responsif)
+- script.js    : File JavaScript (logika aplikasi, keranjang belanja, menu, dan formulir WhatsApp)
+- BACA-DULU.txt: Petunjuk penggunaan
+
+CARA PAKAI
+1. Buka index.html dengan klik dua kali (bisa langsung dibuka di browser, butuh internet untuk memuat font).
+2. Buka script.js dengan Notepad / VS Code, cari blok CONFIG di bagian paling atas.
+   Isi waNumber (contoh 6281234567890), instagram, poClose, dan pickup.
+3. Simpan script.js, lalu refresh browser pada halaman index.html.
+
+CARA ONLINE-KAN (gratis)
+- Netlify Drop (app.netlify.com/drop): seret seluruh folder nomnom-web ke halaman tersebut.
+- Atau GitHub Pages / Vercel / Cloudflare Pages.
+
+MENGGANTI GAMBAR PRODUK
+Gambar produk saat ini berupa ilustrasi SVG di dalam script.js (objek ART).
+Untuk foto asli, taruh file foto di folder ini (misal kimbab.jpg), lalu sesuaikan fungsi card() di script.js
+dengan mengganti bagian <div class="tile">...</div> menjadi <img src="kimbab.jpg" alt="Kimbab">.
