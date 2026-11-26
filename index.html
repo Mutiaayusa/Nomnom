@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>NomNom</title>
+<title>NomNom - Web Pemesanan & Transaksi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -12,22 +12,46 @@
 </head>
 <body>
 
+<!-- Topbar Mode Admin (Muncul saat admin login) -->
+<div id="adminBanner" class="admin-topbar" hidden>
+  <div class="wrap admin-topbar-inner">
+    <span><strong>🛡️ Mode Admin Aktif</strong> &bull; Kelola Pesanan & Katalog</span>
+    <div style="display:flex;gap:.5rem">
+      <button class="btn-admin-pill" type="button" id="btnOpenDashboard">Buka Dashboard Admin</button>
+      <button class="btn-admin-pill outline" type="button" id="btnAdminLogout">Keluar</button>
+    </div>
+  </div>
+</div>
+
 <header>
   <div class="wrap bar">
     <a class="logo" href="#atas" aria-label="NomNom, ke atas">Nom<b>Nom</b></a>
     <nav aria-label="Menu halaman">
-      <a href="#menu">Menu</a><a href="#pesan">Pesan</a><a href="#cara">Cara order</a><a href="#tentang">Tentang</a>
+      <a href="#menu">Menu</a>
+      <a href="#pesan">Pesan & Bayar</a>
+      <a href="#cara">Cara Transaksi</a>
+      <a href="#tentang">Tentang</a>
     </nav>
-    <a class="cartbtn" href="#pesan" aria-label="Lihat pesanan">Pesanan <span id="cnt">0</span></a>
+    <div class="header-actions">
+      <button class="history-btn" type="button" id="btnAdminToggle" title="Login Admin Toko">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span id="adminToggleLabel">Admin</span>
+      </button>
+      <button class="history-btn" type="button" id="btnOpenHistory" title="Lihat riwayat pesanan kamu">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>Pesanan Saya</span>
+      </button>
+      <a class="cartbtn" href="#pesan" aria-label="Lihat keranjang pesanan">Keranjang <span id="cnt">0</span></a>
+    </div>
   </div>
 </header>
 
 <main class="wrap" id="atas">
   <div class="hero">
     <div>
-      <span class="eyebrow">Open pre-order</span>
+      <span class="eyebrow">Open Pre-Order</span>
       <h1>Good food, <em>happy mood.</em></h1>
-      <p class="lead">Kimbab, kebab, dan sate pusut dalam satu tempat. Beragam rasa, harga terjangkau, dibuat segar sesuai pesanan.</p>
+      <p class="lead">Kimbab, kebab, dan sate pusut dalam satu tempat. Pesan dan bayar langsung dari website kami tanpa ribet.</p>
       <div class="cta-row">
         <a class="btn primary" href="#menu">Lihat menu</a>
         <a class="btn" href="#cara">Cara order</a>
@@ -36,8 +60,8 @@
     <aside class="po" aria-label="Info pre-order">
       <span class="pill"><i></i><span id="poStatus">PO sedang dibuka</span></span>
       <h2>Info PO minggu ini</h2>
-      <div class="row"><span>PO ditutup</span><b id="poClose">Cek story Instagram</b></div>
-      <div class="row"><span>Pengambilan</span><b id="poPick">Sesuai jadwal di WhatsApp</b></div>
+      <div class="row"><span>PO ditutup</span><b id="poClose">Jumat, 20.00 WITA</b></div>
+      <div class="row"><span>Pengambilan</span><b id="poPick">Sesuai jadwal yang dipilih di web</b></div>
       <div class="row"><span>Wilayah</span><b>Mataram dan sekitarnya</b></div>
       <div class="row"><span>Mulai dari</span><b class="rp">Rp10.000</b></div>
     </aside>
@@ -45,63 +69,125 @@
 
   <section id="menu">
     <div class="head">
-      <span class="eyebrow">Menu</span>
+      <span class="eyebrow">Menu Pilihan</span>
       <h2>Tiga pilihan, satu merek.</h2>
-      <p>Pilih jumlahnya, lalu lanjut ke pesanan. Bisa campur jenis dalam satu order.</p>
+      <p>Pilih jumlahnya, lalu selesaikan transaksi di formulir bawah. Bisa campur varian menu dalam satu order.</p>
     </div>
     <div class="grid" id="menuGrid"></div>
-    <p class="note">Harga sudah termasuk kemasan. Ongkos antar (jika ada) disepakati lewat WhatsApp.</p>
+    <p class="note">Harga sudah termasuk kemasan higienis. Pilihan antar kurir tersedia saat checkout.</p>
   </section>
 
   <section id="paket">
     <div class="head">
-      <span class="eyebrow">Paket hemat</span>
+      <span class="eyebrow">Paket Hemat</span>
       <h2>Beli lebih dari satu, dapat bonus saus.</h2>
-      <p>Harga paket sama dengan harga satuan. Bedanya, kamu dapat saus atau sambal tambahan.</p>
+      <p>Harga paket hemat dengan tambahan saus atau sambal spesial dapur NomNom.</p>
     </div>
     <div class="grid two-col" id="paketGrid"></div>
   </section>
 </main>
 
+<!-- SEKSI CHECKOUT & TRANSAKSI DI WEB -->
 <div class="order" id="pesan">
   <div class="wrap">
     <section>
       <div class="head">
-        <span class="eyebrow">Pesanan kamu</span>
-        <h2>Cek pesanan, lalu kirim lewat WhatsApp.</h2>
-        <p>Pesanan dirapikan otomatis menjadi pesan siap kirim. Admin akan membalas dengan konfirmasi dan total pembayaran.</p>
+        <span class="eyebrow">Transaksi Online</span>
+        <h2>Selesaikan pesanan langsung di web.</h2>
+        <p>Semua proses transaksi diproses otomatis di web. Lengkapi formulir pemesanan untuk mendapatkan invoice dan struk resmi.</p>
       </div>
       <div class="ogrid">
+        <!-- Panel Ringkasan -->
         <div class="panel" aria-live="polite">
-          <h3>Ringkasan</h3>
+          <h3>Ringkasan Pesanan</h3>
           <div id="lines"></div>
-          <div class="total"><span>Total</span><span class="rp" id="total">Rp0</span></div>
-          <p class="hint">Belum termasuk ongkos antar.</p>
+          <div class="total"><span>Total Tagihan</span><span class="rp" id="total">Rp0</span></div>
+          <p class="hint">Harga sudah termasuk biaya kemasan.</p>
+          <div style="margin-top:1.2rem;padding-top:1rem;border-top:1px dashed var(--line)">
+            <button type="button" class="btn" id="btnViewLastOrder" style="width:100%;font-size:.88rem;padding:.55rem" hidden>
+              Lihat Struk Pesanan Terakhir
+            </button>
+          </div>
         </div>
+
+        <!-- Formulir Transaksi -->
         <form class="panel" id="form" autocomplete="off">
-          <h3>Data pemesan</h3>
+          <h3>Data Pemesan & Pembayaran</h3>
           <div class="f">
-            <div><label for="nama">Nama</label><input id="nama" required placeholder="Nama kamu"></div>
             <div>
-              <label id="lblcara">Ambil atau antar</label>
+              <label for="nama">Nama Lengkap <span class="req">*</span></label>
+              <input id="nama" required placeholder="Masukkan nama pemesan">
+            </div>
+            <div>
+              <label for="telp">No. Telepon / HP <span class="req">*</span></label>
+              <input id="telp" type="tel" required placeholder="Contoh: 081234567890">
+            </div>
+            <div>
+              <label id="lblcara">Metode Pengiriman</label>
               <div class="seg" role="radiogroup" aria-labelledby="lblcara">
-                <label><input type="radio" name="cara" value="Ambil di tempat" checked><span>Ambil</span></label>
-                <label><input type="radio" name="cara" value="Antar"><span>Antar</span></label>
+                <label><input type="radio" name="cara" value="Ambil di tempat" checked><span>Ambil di Outlet</span></label>
+                <label><input type="radio" name="cara" value="Antar"><span>Diantar Kurir</span></label>
               </div>
             </div>
             <div class="two">
-              <div><label for="tgl">Tanggal ambil</label><input id="tgl" type="date"></div>
+              <div><label for="tgl">Tanggal</label><input id="tgl" type="date"></div>
               <div><label for="jam">Jam</label><input id="jam" type="time"></div>
             </div>
-            <div id="alamatBox" hidden><label for="alamat">Alamat antar</label><input id="alamat" placeholder="Alamat lengkap"></div>
-            <div><label for="cat">Catatan</label><textarea id="cat" placeholder="Contoh: sambal dipisah, tanpa timun"></textarea></div>
+            <div id="alamatBox" hidden>
+              <label for="alamat">Alamat Pengantaran Lengkap <span class="req">*</span></label>
+              <textarea id="alamat" placeholder="Jalan, nomor rumah, RT/RW, kelurahan/kecamatan, dan patokan"></textarea>
+            </div>
+            <div>
+              <label id="lblbayar">Pilih Metode Pembayaran <span class="req">*</span></label>
+              <div class="pay-options" role="radiogroup" aria-labelledby="lblbayar">
+                <label class="pay-item">
+                  <input type="radio" name="bayar" value="qris" checked>
+                  <span class="pay-card">
+                    <span class="pay-title">
+                      <span>QRIS / E-Wallet</span>
+                      <span class="pill" style="font-size:.7rem;padding:.15rem .5rem">Instan</span>
+                    </span>
+                    <small>Scan via GoPay, OVO, Dana, ShopeePay, atau BCA QRIS</small>
+                  </span>
+                </label>
+                <label class="pay-item">
+                  <input type="radio" name="bayar" value="transfer">
+                  <span class="pay-card">
+                    <span class="pay-title">
+                      <span>Transfer Bank Langsung</span>
+                    </span>
+                    <small>Transfer ke Rekening BCA atau Mandiri Resmi NomNom</small>
+                  </span>
+                </label>
+                <label class="pay-item">
+                  <input type="radio" name="bayar" value="tunai">
+                  <span class="pay-card">
+                    <span class="pay-title">
+                      <span>Bayar Tunai di Tempat (COD)</span>
+                    </span>
+                    <small>Bayar saat pesanan diambil di outlet atau tiba di alamatmu</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Box input pengirim (opsional untuk transfer/QRIS) -->
+            <div id="paymentProofBox" class="proof-box">
+              <label for="pengirimNama">Nama Pemilik Rekening Pengirim (Opsional)</label>
+              <input id="pengirimNama" placeholder="Contoh: Budi Santoso (untuk pencocokan data)">
+            </div>
+
+            <div>
+              <label for="cat">Catatan Pesanan (Opsional)</label>
+              <textarea id="cat" placeholder="Contoh: sambal dipisah, tanpa timun, extra sendok"></textarea>
+            </div>
           </div>
+
           <div class="actions">
-            <a class="btn primary" id="wa" href="#pesan" target="_blank" rel="noopener">Kirim lewat WhatsApp</a>
-            <button class="btn" type="button" id="copy">Salin pesan</button>
+            <button class="btn primary btn-submit" type="submit" id="btnOrder">
+              Pesan & Bayar Sekarang
+            </button>
           </div>
-          <div class="msg" id="preview" aria-label="Pratinjau pesan"></div>
-          <div class="warn" id="waWarn" hidden>Nomor WhatsApp belum diisi di halaman ini, jadi tombol kirim belum aktif. Gunakan tombol Salin pesan lalu tempel di chat NomNom.</div>
         </form>
       </div>
     </section>
@@ -111,14 +197,14 @@
 <main class="wrap">
   <section id="cara">
     <div class="head">
-      <span class="eyebrow">Cara order</span>
-      <h2>Empat langkah, tanpa ribet.</h2>
+      <span class="eyebrow">Alur Transaksi</span>
+      <h2>Empat langkah mudah di web.</h2>
     </div>
     <ol class="steps">
-      <li><b>Pilih menu</b><span>Atur jumlah kimbab, kebab, sate pusut, atau paket hemat.</span></li>
-      <li><b>Kirim pesanan</b><span>Isi data, lalu tekan kirim. Pesan terbuka di WhatsApp NomNom.</span></li>
-      <li><b>Konfirmasi dan bayar</b><span>Admin membalas dengan total. Bayar lewat transfer, e-wallet, atau tunai saat ambil.</span></li>
-      <li><b>Ambil atau terima</b><span>Pesanan dibuat setelah PO ditutup, lalu siap diambil atau diantar.</span></li>
+      <li><b>Pilih menu</b><span>Tentukan varian kimbab, kebab, atau sate pusut favoritmu.</span></li>
+      <li><b>Isi data pengiriman</b><span>Tentukan jadwal dan metode: ambil sendiri atau diantar kurir.</span></li>
+      <li><b>Bayar langsung di web</b><span>Pilih QRIS instan, transfer bank, atau bayar tunai (COD).</span></li>
+      <li><b>Terima pesanan</b><span>Struk invoice langsung terbit di web dan pesanan disiapkan dapur.</span></li>
     </ol>
   </section>
 
@@ -129,30 +215,291 @@
           <span class="eyebrow">Tentang NomNom</span>
           <h2>Beragam rasa, satu tempat.</h2>
         </div>
-        <p>NomNom menyatukan kuliner populer bergaya Korea dan Timur Tengah dengan jajanan khas Lombok. Kimbab, kebab, dan sate pusut dibuat dengan bahan pilihan dan dijual lewat sistem pre-order, supaya setiap pesanan dibuat segar dan tidak ada bahan terbuang.</p>
-        <p>Nama NomNom datang dari bunyi orang yang sedang menikmati makanan. Itu juga yang kami harapkan dari setiap gigitan.</p>
+        <p>NomNom menyatukan kuliner populer bergaya Korea dan Timur Tengah dengan jajanan khas Lombok. Kimbab, kebab, dan sate pusut dibuat dengan bahan pilihan dan dijual lewat sistem pre-order online, supaya setiap pesanan dibuat segar dan tidak ada bahan terbuang.</p>
+        <p>Nama NomNom datang dari bunyi orang yang sedang menikmati makanan lezat. Itu juga yang kami harapkan dari setiap gigitan.</p>
       </div>
       <div>
         <div class="head" style="margin-bottom:.4rem"><span class="eyebrow">Pertanyaan umum</span></div>
-        <details><summary>Apa itu pre-order (PO)?</summary><p>Pesanan dikumpulkan sampai batas waktu PO, lalu dibuat sekaligus. Hasilnya segar dan bisa diambil sesuai jadwal.</p></details>
-        <details><summary>Bagaimana cara membayar?</summary><p>Transfer atau e-wallet setelah admin mengirim total, atau tunai saat pengambilan. Detail rekening dikirim lewat WhatsApp.</p></details>
-        <details><summary>Bisa diantar?</summary><p>Bisa untuk area tertentu di sekitar Mataram. Ongkos antar disepakati lewat WhatsApp.</p></details>
-        <details><summary>Bisa pesan dalam jumlah banyak?</summary><p>Bisa. Untuk acara atau arisan, hubungi kami lebih awal supaya kuota produksi cukup.</p></details>
-        <details><summary>Apakah ada pesanan di luar jadwal PO?</summary><p>Pesanan di luar PO bergantung pada kuota. Tanyakan lewat WhatsApp.</p></details>
+        <details><summary>Apa itu pre-order (PO)?</summary><p>Pesanan dikumpulkan sampai batas waktu PO di web, lalu diproduksi segar dan dapat diambil/diantar sesuai jadwal.</p></details>
+        <details><summary>Bagaimana cara transaksinya?</summary><p>Semua transaksi selesai di web. Kamu bisa bayar via QRIS, transfer bank resmi toko, atau bayar tunai saat pesanan diterima.</p></details>
+        <details><summary>Apakah ada struk atau bukti pemesanan?</summary><p>Ya, setelah klik tombol pesan, struk digital resmi akan langsung muncul di web dan bisa dicetak atau disimpan sebagai file PDF.</p></details>
+        <details><summary>Bisa pesan antar ke alamat?</summary><p>Bisa! Cukup pilih opsi 'Diantar Kurir' saat mengisi data pemesan di web dan masukkan alamat lengkapmu.</p></details>
+        <details><summary>Bisa memesan dalam jumlah banyak?</summary><p>Bisa untuk acara kantor, syukuran, atau kumpul keluarga. Masukkan pesanan lebih awal agar kuota produksi dapur terpenuhi.</p></details>
       </div>
     </div>
   </section>
 
   <footer>
     <div><a class="logo" href="#atas">Nom<b>Nom</b></a><p>Good Food, Happy Mood.</p></div>
-    <div><b>Pesan lewat WhatsApp</b><p id="waShow">Nomor segera ditambahkan</p></div>
-    <div><b>Instagram</b><p id="igShow">Segera ditambahkan</p></div>
+    <div><b>Layanan Pelanggan & Bantuan</b><p id="waShow">081234567890</p></div>
+    <div><b>Instagram Resmi</b><p id="igShow">@nomnom.mtr</p></div>
+    <div><b>Panel Pengelola</b><p><a href="#admin" id="linkFooterAdmin" style="text-decoration:underline;cursor:pointer">Masuk Login Admin</a></p></div>
   </footer>
 </main>
 
 <div class="float" id="float" hidden>
   <div><small>Total pesanan</small><br><b class="rp" id="ftotal">Rp0</b></div>
-  <a class="btn" href="#pesan">Lanjut pesan</a>
+  <a class="btn" href="#pesan">Lanjut bayar</a>
+</div>
+
+<!-- ========================================================
+     MODAL KONFIRMASI TRANSAKSI & STRUK DIGITAL (DI WEB)
+     ======================================================== -->
+<div class="modal-overlay" id="orderModal" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <button class="modal-close-x" type="button" id="btnCloseOrderModalX" aria-label="Tutup">&times;</button>
+      <div class="modal-badge-success">✓</div>
+      <h2 id="modalTitle">Transaksi Berhasil Diterima!</h2>
+      <p class="modal-subtitle">Pesanan kamu telah masuk ke sistem dapur NomNom dan sedang diproses.</p>
+    </div>
+
+    <!-- Status Tracking Web -->
+    <div class="track-bar">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span class="track-bar-title">Status Pesanan Realtime</span>
+        <button type="button" class="btn-copy-sm" id="btnRefreshTracking" style="font-size:.72rem">Perbarui Status</button>
+      </div>
+      <div class="track-steps">
+        <div class="track-step done" id="trackStep1">
+          <div class="track-dot">✓</div>
+          <div class="track-label">Diterima</div>
+        </div>
+        <div class="track-step active" id="trackStep2">
+          <div class="track-dot">2</div>
+          <div class="track-label">Verifikasi</div>
+        </div>
+        <div class="track-step" id="trackStep3">
+          <div class="track-dot">3</div>
+          <div class="track-label">Dapur</div>
+        </div>
+        <div class="track-step" id="trackStep4">
+          <div class="track-dot">4</div>
+          <div class="track-label">Siap</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="receipt" id="receiptContent">
+      <!-- Struk dirender secara dinamis oleh JavaScript -->
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" type="button" id="btnPrintReceipt">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Cetak Struk / PDF
+      </button>
+      <button class="btn primary" type="button" id="btnCloseModal">Selesai & Pesan Baru</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================
+     MODAL RIWAYAT PESANAN (PESANAN SAYA DI WEB)
+     ======================================================== -->
+<div class="modal-overlay" id="historyModal" hidden role="dialog" aria-modal="true" aria-labelledby="historyTitle">
+  <div class="modal-card">
+    <div class="modal-header">
+      <button class="modal-close-x" type="button" id="btnCloseHistoryX" aria-label="Tutup">&times;</button>
+      <h2 id="historyTitle">Riwayat Pesanan Saya</h2>
+      <p class="modal-subtitle">Daftar transaksi yang pernah kamu lakukan di website NomNom.</p>
+    </div>
+    
+    <div class="history-list" id="historyListContent">
+      <!-- Daftar riwayat diisi oleh JS -->
+    </div>
+
+    <div style="margin-top:.5rem">
+      <button class="btn" type="button" id="btnCloseHistory" style="width:100%">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================================
+     MODAL LOGIN ADMIN
+     ======================================================== -->
+<div class="modal-overlay" id="adminLoginModal" hidden role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="modal-card" style="max-width:420px">
+    <div class="modal-header">
+      <button class="modal-close-x" type="button" id="btnCloseLoginModal" aria-label="Tutup">&times;</button>
+      <div style="width:3rem;height:3rem;border-radius:50%;background:var(--nori);color:var(--nori-ink);display:grid;place-items:center;font-size:1.3rem;margin-bottom:.3rem">
+        🔒
+      </div>
+      <h2 id="loginTitle">Login Admin Toko</h2>
+      <p class="modal-subtitle">Masuk untuk mengelola katalog menu dan memproses pesanan masuk.</p>
+    </div>
+
+    <form id="adminLoginForm" style="display:grid;gap:.9rem;margin-top:.4rem">
+      <div>
+        <label for="adminUser">Username</label>
+        <input id="adminUser" required placeholder="admin">
+      </div>
+      <div>
+        <label for="adminPass">Password</label>
+        <input id="adminPass" type="password" required placeholder="admin123">
+      </div>
+      <div id="loginError" style="color:#dc2626;font-size:.85rem;font-weight:600" hidden>Username atau password salah!</div>
+      <div style="background:var(--bg);border:1px dashed var(--line);border-radius:8px;padding:.5rem .75rem;font-size:.78rem;color:var(--muted)">
+        Akses bawaan default:<br>
+        Username: <b>admin</b> &bull; Password: <b>admin123</b>
+      </div>
+      <div style="display:grid;gap:.5rem;margin-top:.4rem">
+        <button class="btn primary" type="submit" style="width:100%">Masuk Admin</button>
+        <button class="btn" type="button" id="btnCancelLogin" style="width:100%">Batal</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ========================================================
+     MODAL DASHBOARD ADMIN (PENGELOLAAN TOKO & PROSES PESANAN)
+     ======================================================== -->
+<div class="modal-overlay" id="adminDashboardModal" hidden role="dialog" aria-modal="true" aria-labelledby="dashTitle">
+  <div class="modal-card admin-modal-card">
+    <div class="modal-header" style="align-items:flex-start;text-align:left">
+      <button class="modal-close-x" type="button" id="btnCloseDashboard" aria-label="Tutup">&times;</button>
+      <h2 id="dashTitle">Dashboard Pengelolaan Toko</h2>
+      <p class="modal-subtitle">Kelola pesanan pelanggan secara realtime dan atur katalog menu NomNom.</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="admin-tabs" role="tablist">
+      <button class="admin-tab active" type="button" id="tabBtnOrders">
+        📦 Pesanan Masuk <span class="pill" id="orderCountPill" style="font-size:.72rem;padding:.1rem .45rem">0</span>
+      </button>
+      <button class="admin-tab" type="button" id="tabBtnCatalog">
+        🍔 Kelola Katalog Menu
+      </button>
+      <button class="admin-tab" type="button" id="tabBtnSettings">
+        ⚙️ Pengaturan PO & Toko
+      </button>
+    </div>
+
+    <!-- Tab 1: Pesanan Masuk (Order Process) -->
+    <div class="admin-tab-content">
+      <div class="admin-tab-pane" id="paneOrders">
+        <!-- Filter Bar -->
+        <div class="admin-filter-bar">
+          <button class="admin-filter-btn active" data-filter="all">Semua (<span id="countAll">0</span>)</button>
+          <button class="admin-filter-btn" data-filter="menunggu_bayar">Menunggu Bayar (<span id="countWait">0</span>)</button>
+          <button class="admin-filter-btn" data-filter="terverifikasi">Terverifikasi (<span id="countVerif">0</span>)</button>
+          <button class="admin-filter-btn" data-filter="dimasak">Dapur / Masak (<span id="countCook">0</span>)</button>
+          <button class="admin-filter-btn" data-filter="siap">Siap Diantar/Ambil (<span id="countReady">0</span>)</button>
+          <button class="admin-filter-btn" data-filter="selesai">Selesai (<span id="countDone">0</span>)</button>
+        </div>
+
+        <!-- Orders List Container -->
+        <div class="admin-orders-list" id="adminOrdersContainer">
+          <!-- Diisi otomatis lewat JS -->
+        </div>
+      </div>
+
+      <!-- Tab 2: Kelola Katalog Menu -->
+      <div class="admin-tab-pane" id="paneCatalog" hidden>
+        <!-- Editor Box (Tambah / Edit) -->
+        <div class="catalog-editor-box">
+          <h3 id="catEditorTitle" style="font-size:1.15rem">Tambah Menu Baru</h3>
+          <form id="catalogForm" style="display:grid;gap:.8rem">
+            <input type="hidden" id="editProdId">
+            <div class="two">
+              <div>
+                <label for="prodName">Nama Menu <span class="req">*</span></label>
+                <input id="prodName" required placeholder="Contoh: Kimbab Bulgogi">
+              </div>
+              <div>
+                <label for="prodTag">Tag / Label <span class="req">*</span></label>
+                <input id="prodTag" required placeholder="Contoh: Gaya Korea / Spesial">
+              </div>
+            </div>
+            <div class="two">
+              <div>
+                <label for="prodPrice">Harga (Rp) <span class="req">*</span></label>
+                <input id="prodPrice" type="number" required min="500" step="500" placeholder="15000">
+              </div>
+              <div>
+                <label for="prodType">Kategori Menu</label>
+                <select id="prodType">
+                  <option value="satuan">Menu Satuan</option>
+                  <option value="paket">Paket Hemat</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label for="prodDesc">Deskripsi Menu <span class="req">*</span></label>
+              <textarea id="prodDesc" required placeholder="Jelaskan bahan dan cita rasa makanan"></textarea>
+            </div>
+            <div class="two">
+              <div>
+                <label for="prodColor">Warna Latar Kartu</label>
+                <select id="prodColor">
+                  <option value="var(--tile-k)">Hijau Lembut (Kimbab)</option>
+                  <option value="var(--tile-b)">Cokelat Muda (Kebab)</option>
+                  <option value="var(--tile-s)">Kuning Telur (Sate)</option>
+                  <option value="var(--tile-p)">Merah Muda (Paket Hemat)</option>
+                </select>
+              </div>
+              <div>
+                <label for="prodBonus">Bonus Khusus (Khusus Paket Hemat)</label>
+                <input id="prodBonus" placeholder="Contoh: Bonus saus">
+              </div>
+            </div>
+            <div style="display:flex;gap:.6rem;margin-top:.4rem">
+              <button class="btn primary" type="submit" id="btnSaveProd">Simpan Menu</button>
+              <button class="btn" type="button" id="btnCancelEditProd" style="display:none">Batal Edit</button>
+            </div>
+          </form>
+        </div>
+
+        <h3 style="font-size:1.15rem;margin-top:.4rem">Daftar Menu Saat Ini</h3>
+        <div class="admin-catalog-list" id="adminCatalogList">
+          <!-- Diisi otomatis lewat JS -->
+        </div>
+      </div>
+
+      <!-- Tab 3: Pengaturan PO & Toko -->
+      <div class="admin-tab-pane" id="paneSettings" hidden>
+        <form id="storeSettingsForm" style="display:grid;gap:.9rem;background:var(--bg);padding:1.2rem;border-radius:16px;border:1.5px solid var(--line)">
+          <div style="display:flex;justify-content:space-between;align-items:center;background:var(--surface);padding:.8rem 1rem;border-radius:12px;border:1px solid var(--line)">
+            <div>
+              <b>Status Buka Pre-Order (PO)</b>
+              <p style="font-size:.82rem;color:var(--muted)">Atur apakah pelanggan bisa memesan saat ini</p>
+            </div>
+            <label style="margin:0;display:flex;align-items:center;gap:.5rem;cursor:pointer">
+              <input type="checkbox" id="cfgPoOpen" style="width:1.3rem;height:1.3rem;accent-color:var(--accent)">
+              <span id="cfgPoOpenLabel" style="font-weight:700">Buka</span>
+            </label>
+          </div>
+          <div class="two">
+            <div>
+              <label for="cfgPoClose">Jadwal Tutup PO</label>
+              <input id="cfgPoClose" placeholder="Contoh: Jumat, 20.00 WITA">
+            </div>
+            <div>
+              <label for="cfgPickup">Jadwal Pengambilan / Kirim</label>
+              <input id="cfgPickup" placeholder="Contoh: Sabtu, 10.00 - 15.00">
+            </div>
+          </div>
+          <div class="two">
+            <div>
+              <label for="cfgPhone">Nomor Telepon Toko</label>
+              <input id="cfgPhone" placeholder="Contoh: 081234567890">
+            </div>
+            <div>
+              <label for="cfgInstagram">Username Instagram</label>
+              <input id="cfgInstagram" placeholder="Contoh: nomnom.mtr">
+            </div>
+          </div>
+          <div style="border-top:1px dashed var(--line);padding-top:.8rem">
+            <label for="cfgNewPass">Ganti Password Admin (Opsional)</label>
+            <input id="cfgNewPass" type="password" placeholder="Kosongkan jika tidak ingin mengganti password">
+          </div>
+          <div>
+            <button class="btn primary" type="submit" style="width:100%">Simpan Pengaturan Toko</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="script.js"></script>

@@ -1,22 +1,35 @@
-NomNom - Web Pemesanan
+NomNom - Web Pemesanan & Transaksi Online (Fullstack PHP & MySQL Database)
 
-STRUKTUR FILE:
-- index.html   : File utama HTML (struktur halaman web)
-- style.css    : File CSS (semua styling, tema tampilan, layout, dan responsif)
-- script.js    : File JavaScript (logika aplikasi, keranjang belanja, menu, dan formulir WhatsApp)
-- BACA-DULU.txt: Petunjuk penggunaan
+PANDUAN MENGHUBUNGKAN KE DATABASE MYSQL (XAMPP / LARAGON):
+1. Buka XAMPP Control Panel, lalu jalankan (Start) modul Apache dan MySQL.
+2. Pindahkan atau salin folder `nomnom-web` ini ke dalam folder `htdocs` XAMPP:
+   (Misal: C:\xampp\htdocs\nomnom-web\)
+3. Buka browser dan masuk ke phpMyAdmin:
+   http://localhost/phpmyadmin/
+4. Buat Database Baru:
+   - Nama database: nomnom_db
+   - Klik tombol "Create / Buat".
+5. Impor Tabel Database:
+   - Klik tab "Import" di phpMyAdmin.
+   - Pilih berkas `database.sql` yang ada di dalam folder nomnom-web.
+   - Klik "Go / Kirim".
+   (Database akan otomatis terisi tabel: admin, produk, pesanan, detail_pesanan, dan pengaturan_toko).
+6. Buka Website di Browser:
+   http://localhost/nomnom-web/
 
-CARA PAKAI
-1. Buka index.html dengan klik dua kali (bisa langsung dibuka di browser, butuh internet untuk memuat font).
-2. Buka script.js dengan Notepad / VS Code, cari blok CONFIG di bagian paling atas.
-   Isi waNumber (contoh 6281234567890), instagram, poClose, dan pickup.
-3. Simpan script.js, lalu refresh browser pada halaman index.html.
+AKSES LOGIN ADMIN (TERSIMPAN DI DATABASE MYSQL):
+- Username Default : admin
+- Password Default : admin123
+(Tersimpan secara aman di tabel `admin` dengan enkripsi password_hash).
 
-CARA ONLINE-KAN (gratis)
-- Netlify Drop (app.netlify.com/drop): seret seluruh folder nomnom-web ke halaman tersebut.
-- Atau GitHub Pages / Vercel / Cloudflare Pages.
-
-MENGGANTI GAMBAR PRODUK
-Gambar produk saat ini berupa ilustrasi SVG di dalam script.js (objek ART).
-Untuk foto asli, taruh file foto di folder ini (misal kimbab.jpg), lalu sesuaikan fungsi card() di script.js
-dengan mengganti bagian <div class="tile">...</div> menjadi <img src="kimbab.jpg" alt="Kimbab">.
+STRUKTUR FILE (SEMUA DI DALAM 1 FOLDER UTAMA):
+- index.html     : Tampilan antarmuka website, form checkout, modal struk, dan dashboard admin
+- style.css      : Styling CSS responsive, dark/light theme, progress tracking, dan print view
+- script.js      : Logika JavaScript yang menghubungkan frontend ke file-file PHP
+- database.sql   : Skrip struktur tabel database dan data awal (impor ke phpMyAdmin)
+- koneksi.php    : File koneksi PDO MySQL & response JSON
+- auth.php       : Login admin, cek sesi, ganti password, & logout
+- pesanan.php    : Menyimpan pesanan pembeli ke tabel `pesanan` & `detail_pesanan`, serta update status pesanan
+- katalog.php    : Mengambil data menu dari tabel `produk`, tambah/edit menu, toggle status stok, & hapus menu
+- pengaturan.php : Pengaturan buka/tutup PO dan kontak toko
+- BACA-DULU.txt  : Panduan ini
